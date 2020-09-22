@@ -78,10 +78,16 @@ namespace Senai.EfCore.Tarde.Controllers
                 if(produto == null)
                 
                     return NotFound();
-                
+
+                Moeda dolar = new Moeda();
+
                 // Caso o produto exista retorna
                 // Ok e seus dados
-                return Ok(id);
+                return Ok(new
+                {
+                    produto,
+                    valorDolar = produto.Preco / dolar.GetDolarValue()
+                }); // R$ 129,90 / U$ 5,44 = U$ 23,87
 
             }
             catch (Exception ex)
